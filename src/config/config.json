@@ -1,0 +1,8 @@
+{
+  "API":"https://api.github.com/users/hacktivist123/repos",
+  "apiMovies":"https://api.themoviedb.org/3/movie/550?api_key=",
+  "listMovies":"https://api.themoviedb.org/4/list/1?page=1&api_key=",
+  "key":"805a7065bd16544ce0cf1a808bccfd58",
+  "access":"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MDVhNzA2NWJkMTY1NDRjZTBjZjFhODA4YmNjZmQ1OCIsInN1YiI6IjYwMjg4NTNlNWFiODFhMDA0MWU0ZTM2OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.PepuiMVBaKpykpcREtUhw7prKOr3ps2S4XCQg2PNYHI",
+  "base_url":"https://image.tmdb.org/t/p/w500"
+}
