@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { getFavorite } from '../reducers/movies';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloud, faHeart } from '@fortawesome/free-solid-svg-icons';
 import List from '../components/List';
@@ -40,17 +41,8 @@ class Favorites extends React.Component {
     super(props);
   }
   render() {
-    let fav = this.props.movies.dataWithCheck ? true : false;
-    let findFavorite = false;
-
-    if (fav) {
-      findFavorite = this.props.movies.dataWithCheck.find((item) => {
-        return item.check === true;
-      })
-    }
-
     return (<div>
-      {fav && findFavorite ? <InfoDetail data={this.props.movies.dataWithCheck} /> : <Empty />}
+      {this.props.favorite ? <InfoDetail data={this.props.movies.dataWithCheck} /> : <Empty />}
     </div>)
   }
 }
@@ -58,5 +50,9 @@ Favorites.propTypes = {
   movies: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = ({ movies }) => ({ movies });
+const mapStateToProps = (store) => (
+  {
+    movies: store.movies,
+    favorite: getFavorite(store.movies.dataWithCheck)
+  });
 export default connect(mapStateToProps, null)(Favorites);

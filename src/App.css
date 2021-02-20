@@ -13,7 +13,7 @@ color: #fff;
   margin-bottom: 15px;
 }
 .favorite {
-  margin-bottom: 7px;
+  margin: 10px;
   display: inline-block;
   font-weight: 400;
 }
@@ -72,5 +72,5 @@ img {
   display: inline-block;
 }
 .select {
-  color: #fff;
+  color: #0a1a90;
 }

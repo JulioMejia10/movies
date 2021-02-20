@@ -13,27 +13,18 @@ import List from './components/List';
 import Favorites from './components/Favorites';
 import { moviesList } from './clientRequest/httpServer';
 import { setValue } from './actions';
-import { alphabetic, numbers, getDataWithCheck, getOriginal } from './helpers';
+import { alphabetic, puntuation, getDataWithCheck } from './helpers';
 import 'flexboxgrid';
 import './App.css';
-
-const InfoDetail = () => {
-  const { id } = useParams();
-  return (
-    <div>
-      <Detail id={id} />
-    </div>
-  );
-}
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       dataOfMovies: [],
-      dataCheckeds: [],
+      data: [],
       valueSelect: 'default',
-      objectConstants: { nameSelect: 'puntuation' }
+      objectConstants: { nameSelect: 'puntuation', default: 'default' }
     };
   }
 
@@ -45,6 +36,7 @@ class App extends React.Component {
     try {
       const result = await moviesList();
       this.setState({ dataOfMovies: getDataWithCheck(result) });
+      this.setState({ data: getDataWithCheck(result) });
       const info = { id: null, dataWithCheck: getDataWithCheck(result) };
       this.props.setValue(info);
     } catch (error) {
@@ -57,8 +49,8 @@ class App extends React.Component {
   }
 
   handleClick(id) {
-    const info = { id, dataWithCheck: this.state.dataOfMovies };
-    this.props.setValue(info);
+    const infoByRedux = { id, dataWithCheck: this.state.dataOfMovies };
+    this.props.setValue(infoByRedux);
   }
 
   handleInputChange(id, isFavorite) {
@@ -70,13 +62,15 @@ class App extends React.Component {
     });
 
     this.setState({ dataOfMovies: dataWithCheck });
-    const info = { id, dataWithCheck };
-    this.props.setValue(info);
+    const infoByRedux = { id, dataWithCheck };
+    this.props.setValue(infoByRedux);
   }
 
   handleChange(e) {
     if (e.target.value === this.state.objectConstants.nameSelect) {
-      numbers(this.state.dataOfMovies);
+      puntuation(this.state.dataOfMovies);
+    } else if (e.target.value === this.state.objectConstants.default) {
+      this.setState({ dataOfMovies: this.state.data });
     } else {
       alphabetic(this.state.dataOfMovies);
     }
@@ -124,16 +118,6 @@ class App extends React.Component {
                 <Link to="/favorites">My favorite movies</Link>
               </div>
             </div>
-            <div className="col-xs-4">
-              <div className="box">
-                <span className="favorite select">Filter by:</span>
-                <select value={this.state.valueSelect} onChange={(e) => this.handleChange(e)}>
-                  <option value="default">Default</option>
-                  <option value="puntuation">Puntuation</option>
-                  <option value="alfa">alfabetic</option>
-                </select>
-              </div>
-            </div>
           </div>
 
           <Switch>
@@ -144,6 +128,18 @@ class App extends React.Component {
               <Favorites favorites={this.state.dataOfMovies} />
             </Route>
             <Route path="/">
+              <div className="row">
+                <div className="col-xs-12">
+                  <div className="box">
+                    <span className="favorite select">Filter by:</span>
+                    <select value={this.state.valueSelect} onChange={(e) => this.handleChange(e)}>
+                      <option value="default">Init</option>
+                      <option value="puntuation">Puntuation</option>
+                      <option value="alfa">alfabetic</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
               {dataOfMovies}
             </Route>
           </Switch>
@@ -152,6 +148,15 @@ class App extends React.Component {
       </Router>
     );
   }
+}
+
+const InfoDetail = () => {
+  const { id } = useParams();
+  return (
+    <div>
+      <Detail id={id} />
+    </div>
+  );
 }
 
 App.propTypes = {

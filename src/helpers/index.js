@@ -10,7 +10,7 @@ const alphabetic = (information) => {
   });
 }
 
-const numbers = (information) => {
+const puntuation = (information) => {
   return information.sort(function (a, b) {
     return b.vote_average - a.vote_average;
   });
@@ -36,7 +36,7 @@ const getOriginal = (information) => {
 
 export {
   alphabetic,
-  numbers,
+  puntuation,
   getDataWithCheck,
   getFavorites,
   getOriginal
