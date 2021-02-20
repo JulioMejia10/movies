@@ -1,6 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Config from '../config/config.json';
 import { moviesList } from '../clientRequest/httpServer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -21,14 +25,21 @@ class Detail extends React.Component {
     const getDetail = this.state.data.filter(item => {
       return Number(item.id) === Number(this.props.id)
     });
+    let findFavorite = this.props.movies.dataWithCheck.find((item) => {
+      return item.id === this.props.movies.id;
+    })
 
     const deatilToShow = getDetail.map((item) => {
       return (
-        <div key={item.id} className="col s12 m5">
-          <div className="card">
-            <div className="card-image">
-              <img src={`${Config.base_url}${item.poster_path}`} />
-              <span className="card-title">Card Title</span>
+        <div key={item.id} className="">
+          {findFavorite.check && <FontAwesomeIcon icon={faCheckCircle} />}
+          <div className="col s12 m5">
+            <div className="card">
+              <div className="card-image">
+                <img src={`${Config.base_url}${item.poster_path}`} />
+                <span className="card-title">Card Title</span>
+                {/* <span className="card-title">{this.props.movies}</span> */}
+              </div>
             </div>
           </div>
         </div>
@@ -42,5 +53,10 @@ class Detail extends React.Component {
     )
   }
 }
+Detail.propTypes = {
+  movies: PropTypes.object.isRequired,
+}
 
-export default Detail;
+const mapStateToProps = ({ movies }) => ({ movies });
+
+export default connect(mapStateToProps, null)(Detail);

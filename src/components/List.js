@@ -13,15 +13,13 @@ class List extends React.Component {
     let dataMovies = this.props.dataMovies;
 
     return (
-      <div>
-        <div className="wrapper">
-          <div className="card" key={dataMovies.id}>
-            <div className="image-container">
-              <img src={`${baseUrl}${dataMovies.poster_path}`}></img>
-            </div>
-            <p>{dataMovies.title}</p>
-            <p>{dataMovies.vote_average}</p>
+      <div className="wrapper">
+        <div className="card" key={dataMovies.id}>
+          <div className="image-container">
+            <img src={`${baseUrl}${dataMovies.poster_path}`}></img>
           </div>
+          <p>name: {dataMovies.title}</p>
+          <p>puntuation:{dataMovies.vote_average}</p>
         </div>
       </div>
     );
