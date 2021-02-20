@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-//import 'materialize-css/dist/css/materialize.min.css'
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +13,7 @@ import Detail from './components/Detail';
 import Favorites from './components/Favorites';
 import { moviesList } from './clientRequest/httpServer';
 import { setValue } from './actions';
+import 'flexboxgrid';
 import './App.css';
 
 const InfoDetail = () => {
@@ -70,17 +70,25 @@ class App extends React.Component {
     const dataOfMovies = this.state.dataOfMovies.map((item) => {
       return (
         <div key={item.id} >
-          <span>check your favorite</span>
-          <form>
-            <input
-              name={item.name}
-              type="checkbox"
-              checked={item.check}
-              onChange={(e) => this.handleInputChange(item.id, item.check)} />
-          </form>
-          <Link to={`/detail/${item.id}`} onClick={() => { this.handleClick(item.id) }}>
-            <Home movies={item} />
-          </Link>
+          <div class="card-parent row center-xs">
+            <div class="card-child col-xs-11">
+              <div class="box">
+                <form>
+                  <span className="favorite">add to favorites</span>
+                  <input
+                    name={item.name}
+                    type="checkbox"
+                    checked={item.check}
+                    onChange={(e) => this.handleInputChange(item.id, item.check)} />
+                </form>
+              </div>
+              <div class="box">
+                <Link to={`/detail/${item.id}`} onClick={() => { this.handleClick(item.id) }}>
+                  <Home movies={item} />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       );
     })
@@ -88,16 +96,18 @@ class App extends React.Component {
     return (
       <Router>
         <div className="App">
-          <nav>
-            <ul>
-              <li>
+          <div className="parent row">
+            <div className="child col-xs-4">
+              <div className="box">
                 <Link to="/">Home</Link>
-              </li>
-              <li>
+              </div>
+            </div>
+            <div className="col-xs-4">
+              <div className="box">
                 <Link to="/favorites">My favorite movies</Link>
-              </li>
-            </ul>
-          </nav>
+              </div>
+            </div>
+          </div>
 
           <Switch>
             <Route path="/detail/:id">

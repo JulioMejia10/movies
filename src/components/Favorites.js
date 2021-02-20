@@ -27,6 +27,14 @@ const InfoDetail = (props) => {
   );
 }
 
+const Nada = () => {
+  return (
+    <div>
+      nothing
+    </div>
+  );
+}
+
 class Favorites extends React.Component {
   constructor(props) {
     super(props);
@@ -42,7 +50,7 @@ class Favorites extends React.Component {
     }
 
     return (<div>
-      {fav && findFavorite ? <InfoDetail data={this.props.movies.dataWithCheck} /> : 'nada'}
+      {fav && findFavorite ? <InfoDetail data={this.props.movies.dataWithCheck} /> : <Nada />}
     </div>)
   }
 }

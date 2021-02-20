@@ -2,8 +2,33 @@
   text-align: center;
 }
 
+a {
+text-decoration: none;
+color: #fff;
+}
+.parent {
+  background-color: #6200EE;
+  padding: 16px;
+  margin-bottom: 15px;
+}
+.favorite {
+  margin: 10px;
+  display: inline-block;
+}
+.box .center-xs {
+ margin-bottom: 2rem;
+}
+p {
+color: #000;
+}
+.card-child {
+    border-bottom: 1px solid #000;
+}
+.row .child {
+  border-right: 1px solid #fff;
+}
+
 .App-header {
-  background-color: #b71c1c;
   min-height: 90px;
   display: flex;
   flex-direction: column;
