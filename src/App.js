@@ -13,6 +13,7 @@ import Detail from './components/Detail';
 import Favorites from './components/Favorites';
 import { moviesList } from './clientRequest/httpServer';
 import { setValue } from './actions';
+import { alphabetic, numbers, getDataWithCheck } from './helpers';
 import 'flexboxgrid';
 import './App.css';
 
@@ -28,7 +29,12 @@ const InfoDetail = () => {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { dataOfMovies: [], dataCheckeds: [] };
+    this.state = {
+      dataOfMovies: [],
+      dataCheckeds: [],
+      valueSelect: 'default',
+      objectConstants: { nameSelect: 'puntuation' }
+    };
   }
 
   componentDidMount() {
@@ -38,10 +44,7 @@ class App extends React.Component {
   async getData() {
     try {
       const result = await moviesList();
-      const dataWithCheck = result.results.map((item) => {
-        return { ...item, check: false, name: `check${item.id}` }
-      });
-      this.setState({ dataOfMovies: dataWithCheck });
+      this.setState({ dataOfMovies: getDataWithCheck(result) });
 
     } catch (error) {
       console.log(error);
@@ -58,7 +61,7 @@ class App extends React.Component {
       if (item.id === id) {
         return { ...item, check: !isFavorite, name: `check${item.id}` }
       }
-      return item
+      return item;
     });
 
     this.setState({ dataOfMovies: dataWithCheck });
@@ -66,23 +69,39 @@ class App extends React.Component {
     this.props.setValue(info);
   }
 
+  handleChange(e) {
+    if (e.target.value === this.state.objectConstants.nameSelect) {
+      numbers(this.state.dataOfMovies);
+    } else {
+      alphabetic(this.state.dataOfMovies);
+    }
+    this.setState({ valueSelect: e.target.value });
+  }
+
   render() {
     const dataOfMovies = this.state.dataOfMovies.map((item) => {
       return (
         <div key={item.id} >
-          <div class="card-parent row center-xs">
-            <div class="card-child col-xs-11">
-              <div class="box">
+          <div className="card-parent row center-xs">
+            <div className="card-child col-xs-11">
+              <div className="box">
                 <form>
                   <span className="favorite">add to favorites</span>
                   <input
                     name={item.name}
                     type="checkbox"
                     checked={item.check}
-                    onChange={(e) => this.handleInputChange(item.id, item.check)} />
+                    onChange={() => this.handleInputChange(item.id, item.check)} />
+                  <br />
+                  <span className="favorite">Filter by:</span>
+                  <select value={this.state.valueSelect} onChange={(e) => this.handleChange(e)}>
+                    <option value="default">Default</option>
+                    <option value="puntuation">Puntuation</option>
+                    <option value="alfa">alfabetic</option>
+                  </select>
                 </form>
               </div>
-              <div class="box">
+              <div className="box">
                 <Link to={`/detail/${item.id}`} onClick={() => { this.handleClick(item.id) }}>
                   <Home movies={item} />
                 </Link>

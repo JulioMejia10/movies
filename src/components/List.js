@@ -21,23 +21,14 @@ class List extends React.Component {
                 <div className="image-container">
                   <img src={`${baseUrl}${dataMovies.poster_path}`}></img>
                 </div>
-                <p>name: {dataMovies.title}</p>
-                <p>puntuation:{dataMovies.vote_average}</p>
+                <p><strong>name: </strong>{dataMovies.title}</p>
+                <p><strong>puntuation: </strong>{dataMovies.vote_average}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     );
-    {/* <div className="wrapper">
-        <div className="card" key={dataMovies.id}>
-          <div className="image-container">
-            <img src={`${baseUrl}${dataMovies.poster_path}`}></img>
-          </div>
-          <p>name: {dataMovies.title}</p>
-          <p>puntuation:{dataMovies.vote_average}</p>
-        </div>
-      </div> */}
   }
 }
 

@@ -32,13 +32,14 @@ class Detail extends React.Component {
     const deatilToShow = getDetail.map((item) => {
       return (
         <div key={item.id} className="">
+          {findFavorite.check && <span className="favorite">this is your favorite movie</span>}
           {findFavorite.check && <FontAwesomeIcon icon={faCheckCircle} />}
+
           <div className="col s12 m5">
-            <div className="card">
-              <div className="card-image">
+            <div className="card2">
+              <div className="card-image2">
                 <img src={`${Config.base_url}${item.poster_path}`} />
-                <span className="card-title">Card Title</span>
-                {/* <span className="card-title">{this.props.movies}</span> */}
+                <span className="card-title">{item.overview}</span>
               </div>
             </div>
           </div>

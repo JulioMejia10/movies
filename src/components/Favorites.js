@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Config from '../config/config.json';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCloud } from '@fortawesome/free-solid-svg-icons';
 
 const InfoDetail = (props) => {
   let baseUrl = Config.base_url;
@@ -30,7 +32,8 @@ const InfoDetail = (props) => {
 const Nada = () => {
   return (
     <div>
-      nothing
+      there aren´t movies in this setion.
+      <FontAwesomeIcon icon={faCloud} />
     </div>
   );
 }
