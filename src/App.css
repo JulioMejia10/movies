@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+background-color: #F5F5F6;
 }
 
 a {
@@ -7,12 +8,12 @@ text-decoration: none;
 color: #fff;
 }
 .parent {
-  background-color: #6200EE;
+  background-color: #37006a;
   padding: 16px;
   margin-bottom: 15px;
 }
 .favorite {
-  margin: 10px;
+  margin-bottom: 7px;
   display: inline-block;
   font-weight: 400;
 }
@@ -66,6 +67,10 @@ img {
   height: 75%;
 }
 .card-title {
- justify-content: center;
- color: #48444E;
+  color: #48444E;
+  text-align: justify;
+  display: inline-block;
+}
+.select {
+  color: #fff;
 }

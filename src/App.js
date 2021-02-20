@@ -8,12 +8,12 @@ import {
   Link,
   useParams
 } from "react-router-dom";
-import Home from './components/Home';
 import Detail from './components/Detail';
+import List from './components/List';
 import Favorites from './components/Favorites';
 import { moviesList } from './clientRequest/httpServer';
 import { setValue } from './actions';
-import { alphabetic, numbers, getDataWithCheck } from './helpers';
+import { alphabetic, numbers, getDataWithCheck, getOriginal } from './helpers';
 import 'flexboxgrid';
 import './App.css';
 
@@ -45,10 +45,15 @@ class App extends React.Component {
     try {
       const result = await moviesList();
       this.setState({ dataOfMovies: getDataWithCheck(result) });
-
+      const info = { id: null, dataWithCheck: getDataWithCheck(result) };
+      this.props.setValue(info);
     } catch (error) {
-      console.log(error);
+      this.handleErrors(error)
     }
+  }
+
+  handleErrors = (error) => {
+    console.log(error)
   }
 
   handleClick(id) {
@@ -92,18 +97,11 @@ class App extends React.Component {
                     type="checkbox"
                     checked={item.check}
                     onChange={() => this.handleInputChange(item.id, item.check)} />
-                  <br />
-                  <span className="favorite">Filter by:</span>
-                  <select value={this.state.valueSelect} onChange={(e) => this.handleChange(e)}>
-                    <option value="default">Default</option>
-                    <option value="puntuation">Puntuation</option>
-                    <option value="alfa">alfabetic</option>
-                  </select>
                 </form>
               </div>
               <div className="box">
                 <Link to={`/detail/${item.id}`} onClick={() => { this.handleClick(item.id) }}>
-                  <Home movies={item} />
+                  <List dataMovies={item} />
                 </Link>
               </div>
             </div>
@@ -124,6 +122,16 @@ class App extends React.Component {
             <div className="col-xs-4">
               <div className="box">
                 <Link to="/favorites">My favorite movies</Link>
+              </div>
+            </div>
+            <div className="col-xs-4">
+              <div className="box">
+                <span className="favorite select">Filter by:</span>
+                <select value={this.state.valueSelect} onChange={(e) => this.handleChange(e)}>
+                  <option value="default">Default</option>
+                  <option value="puntuation">Puntuation</option>
+                  <option value="alfa">alfabetic</option>
+                </select>
               </div>
             </div>
           </div>

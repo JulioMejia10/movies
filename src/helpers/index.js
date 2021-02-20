@@ -22,8 +22,22 @@ const getDataWithCheck = (results) => {
   });
 }
 
+const getFavorites = (information) => {
+  return information.filter((item) => {
+    return item.check == true;
+  });
+}
+
+const getOriginal = (information) => {
+  return information.map((item) => {
+    return { ...item, some: '' };
+  });
+}
+
 export {
   alphabetic,
   numbers,
   getDataWithCheck,
+  getFavorites,
+  getOriginal
 }

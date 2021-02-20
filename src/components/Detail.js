@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Config from '../config/config.json';
 import { moviesList } from '../clientRequest/httpServer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 class Detail extends React.Component {
   constructor(props) {
@@ -33,8 +33,10 @@ class Detail extends React.Component {
       return (
         <div key={item.id} className="">
           {findFavorite.check && <span className="favorite">this is your favorite movie</span>}
-          {findFavorite.check && <FontAwesomeIcon icon={faCheckCircle} />}
-
+          {findFavorite.check && <FontAwesomeIcon icon={faStar} />}
+          <br />
+          <p>More details about</p>
+          <strong>{item.title}</strong>
           <div className="col s12 m5">
             <div className="card2">
               <div className="card-image2">

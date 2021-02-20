@@ -1,23 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Config from '../config/config.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCloud } from '@fortawesome/free-solid-svg-icons';
+import { faCloud, faHeart } from '@fortawesome/free-solid-svg-icons';
+import List from '../components/List';
+import { getFavorites } from '../helpers';
 
 const InfoDetail = (props) => {
-  let baseUrl = Config.base_url;
-  const favorites = props.data.filter((item) => {
-    return item.check == true;
-  })
+  const favorites = getFavorites(props.data);
   const dataOfMovies = favorites.map((item) => {
     return (
-      <div className="card" key={item.id}>
-        <div className="image-container">
-          <img src={`${baseUrl}${item.poster_path}`}></img>
-        </div>
-        <p>name: {item.title}</p>
-        <p>puntuation:{item.vote_average}</p>
+      <div key={item.id}>
+        <span className="favorite">Here is your favorite Movies </span>
+        <FontAwesomeIcon icon={faHeart} />
+        <br />
+        <List key={item.id} dataMovies={item} />
       </div>
     );
   })
@@ -29,10 +26,10 @@ const InfoDetail = (props) => {
   );
 }
 
-const Nada = () => {
+const Empty = () => {
   return (
     <div>
-      there aren´t movies in this setion.
+      <span className="favorite">there aren´t movies in this setion. </span>
       <FontAwesomeIcon icon={faCloud} />
     </div>
   );
@@ -53,7 +50,7 @@ class Favorites extends React.Component {
     }
 
     return (<div>
-      {fav && findFavorite ? <InfoDetail data={this.props.movies.dataWithCheck} /> : <Nada />}
+      {fav && findFavorite ? <InfoDetail data={this.props.movies.dataWithCheck} /> : <Empty />}
     </div>)
   }
 }
