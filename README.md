@@ -14,4 +14,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `you can see this project on this url:`
 
-[running tests](https://juliomejia10.github.io/movies/) 
+[link to movies application](https://juliomejia10.github.io/movies/) 
