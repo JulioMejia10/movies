@@ -24,7 +24,9 @@ class App extends React.Component {
       dataOfMovies: [],
       data: [],
       valueSelect: 'default',
-      objectConstants: { nameSelect: 'puntuation', default: 'default' }
+      objectConstants: { nameSelect: 'puntuation', default: 'default' },
+      selectHome: '',
+      selectfavorite: ''
     };
   }
 
@@ -49,6 +51,8 @@ class App extends React.Component {
   }
 
   handleClick(id) {
+    this.setState({ selection: '' });
+    this.setState({ selectfavorite: '' });
     const infoByRedux = { id, dataWithCheck: this.state.dataOfMovies };
     this.props.setValue(infoByRedux);
   }
@@ -75,6 +79,16 @@ class App extends React.Component {
       alphabetic(this.state.dataOfMovies);
     }
     this.setState({ valueSelect: e.target.value });
+  }
+
+  handleTab = (data) => {
+    if (data !== 'home') {
+      this.setState({ selectfavorite: 'selected-favorites' });
+      this.setState({ selection: '' });
+      return false
+    }
+    this.setState({ selection: 'selected' });
+    this.setState({ selectfavorite: '' });
   }
 
   render() {
@@ -108,14 +122,14 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <div className="parent row">
-            <div className="child col-xs-4">
+            <div className={`child col-xs-4 ${this.state.selection}`}>
               <div className="box">
-                <Link to="/">Home</Link>
+                <Link to="/"><div onClick={() => this.handleTab('home')}>Home</div></Link>
               </div>
             </div>
-            <div className="col-xs-4">
+            <div className={`col-xs-4 ${this.state.selectfavorite}`}>
               <div className="box">
-                <Link to="/favorites">My favorite movies</Link>
+                <Link to="/favorites"><div onClick={() => this.handleTab('favorite')}>Go to favorite movies</div></Link>
               </div>
             </div>
           </div>

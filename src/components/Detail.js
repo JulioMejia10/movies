@@ -28,8 +28,7 @@ class Detail extends React.Component {
         <div key={item.id} className="">
           {this.props.isFavorite.check && <span className="favorite">this is your favorite movie</span>}
           {this.props.isFavorite.check && <FontAwesomeIcon icon={faStar} />}
-          <br />
-          <p>More details about</p>
+          <div>More details about</div>
           <strong>{item.title}</strong>
           <div className="col s12 m5">
             <div className="card2">

@@ -9,7 +9,9 @@ color: #fff;
 }
 .parent {
   background-color: #37006a;
-  padding: 16px;
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-bottom: 0px;
   margin-bottom: 15px;
 }
 .favorite {
@@ -26,9 +28,7 @@ color: #000;
 .card-child {
     border-bottom: 1px solid #C4BFCB;
 }
-.row .child {
-  border-right: 1px solid #fff;
-}
+
 
 .App-header {
   min-height: 90px;
@@ -73,4 +73,11 @@ img {
 }
 .select {
   color: #0a1a90;
+}
+
+.selected {
+ border-bottom: 5px solid #fff;
+}
+.selected-favorites {
+  border-bottom: 5px solid #fff;
 }
